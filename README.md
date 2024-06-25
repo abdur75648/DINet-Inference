@@ -63,13 +63,13 @@ TO-BE-CONTINUED...
 ### FFMPEG
 Ensure that FFMPEG is installed on your system to enable audio and video merging functionality in the DINet model. 
 
-* To install FFMPEG, if you have root access to your system, run the following command:
+To install FFMPEG, if you have root access to your system, run the following command:
     ```bash
     sudo apt-get install ffmpeg
     ```
 
-* If you don't have root access, follow the instructions below to install FFMPEG statically in your root directory:
-- **Download the Correct Static Build For Your System:** (Architecture can be checked using ```uname -m``` command)
+If you don't have root access, follow the instructions below to install FFMPEG statically in your root directory:
+1. **Download the Correct Static Build For Your System:** (Architecture can be checked using ```uname -m``` command)
     ```bash
     # For i686:
     wget -O ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-i686-static.tar.xz
@@ -79,7 +79,7 @@ Ensure that FFMPEG is installed on your system to enable audio and video merging
     wget -O ffmpeg.tar.xz https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-arm64-static.tar.xz
     ```
 
-3. **Unzip and Unpack the Build:**
+2. **Unzip and Unpack the Build:**
     ```bash
     tar xvf ffmpeg.tar.xz
     rm ffmpeg.tar.xz
@@ -90,12 +90,12 @@ Ensure that FFMPEG is installed on your system to enable audio and video merging
     cd ffmpeg-git-*-static
     ```
 
-5. **Check the Installation:**
+3. **Check the Installation:**
     ```bash
     ./ffmpeg -version
     ```
 
-6. **Move the Binary to the root Directory:**
+4. **Move the Binary to the root Directory:**
     ```bash
     cd ..
     mv ffmpeg DINet/
