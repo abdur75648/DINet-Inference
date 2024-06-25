@@ -1,0 +1,9 @@
+__pycache__/
+**/__pycache__/
+.DS_Store
+core*
+ffmpeg-git-20240524-amd64-static/
+ffmpeg-git-20240524-amd64-static.tar.xz
+ffmpeg
+asserts/
+asserts.zip
