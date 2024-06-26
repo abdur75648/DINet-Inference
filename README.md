@@ -48,22 +48,41 @@ python inference.py --mouth_region_size=256 --source_video_path=./asserts/exampl
 python inference.py --mouth_region_size=256 --source_video_path=xxx.mp4 --source_openface_landmark_path=xxx.csv --driving_audio_path=xxx.wav --pretrained_clip_DINet_path=./asserts/clip_training_DINet_256mouth.pth
 ```
 
-## Notes
+## Additional Setup Notes
 ### OpenFace
-The ```.csv``` file should contain the facial landmarks detected using [openface](https://github.com/TadasBaltrusaitis/OpenFace)
 
-* Below is a step-by-step guide to extract the facial landmarks using OpenFace:
-1. **Clone the OpenFace repository:**
+The `.csv` file should contain the facial landmarks detected using [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace). Installing OpenFace from scratch can be challenging due to dependency issues. Therefore, it is recommended to use Docker for a quicker setup. Follow these steps for quickstart usage of OpenFace with Docker:
+
+1. Run the OpenFace Docker container:
     ```bash
-    git clone https://github.com/TadasBaltrusaitis/OpenFace.git
-    cd OpenFace
+    docker run -it --rm algebr/openface:latest
     ```
-TO-BE-CONTINUED...
+2. Find the container ID by running this (*in a different terminal*):
+    ```bash
+    docker ps
+    ```
+    (Let's say it shows `a52fea727822`)
+
+3. Transfer any video you want to run OpenFace on:
+    ```bash
+    docker cp test.mp4 a52fea727822:/home/openface-build
+    ```
+4. In the first shell (*where the container is running*), run OpenFace on the video:
+    ```bash
+    build/bin/FaceLandmarkVidMulti -f test.mp4
+    ```
+5. The output will be saved as `test.csv` in the `processed` directory. Transfer it back to your local machine (*in a different terminal*):
+    ```bash
+    docker cp a52fea727822:/home/openface-build/processed/test.csv .
+    ```
+
+* Note that we are using `FaceLandmarkVidMulti` here for videos, than `FaceLandmarkVid` (For images, use `FaceLandmarkImg`). This is because `FaceLandmarkVid` requires a display for its operations, which is not available in a Docker container by default. If you need to use `FaceLandmarkVid`, you can set up X11 forwarding on your local machine to enable the display (Ref. [this issue](https://github.com/TadasBaltrusaitis/OpenFace/issues/1076#issuecomment-2192538076)).
 
 ### FFMPEG
 Ensure that FFMPEG is installed on your system to enable audio and video merging functionality in the DINet model. 
 
 To install FFMPEG, if you have root access to your system, run the following command:
+
     ```bash
     sudo apt-get install ffmpeg
     ```
