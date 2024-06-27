@@ -7,3 +7,7 @@ ffmpeg-git-20240524-amd64-static.tar.xz
 ffmpeg
 asserts/
 asserts.zip
+test_data/
+test_data.zip
+test_output/
+test_output.zip

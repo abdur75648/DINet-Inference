@@ -40,12 +40,7 @@ rm asserts.zip
 ## Inference
 * For running inference on the example videos, run the following command:
 ```bash
-python inference.py --mouth_region_size=256 --source_video_path=./asserts/examples/test1.mp4 --source_openface_landmark_path=./asserts/examples/test1.csv --driving_audio_path=./asserts/examples/driving_audio_1.wav --pretrained_clip_DINet_path=./asserts/clip_training_DINet_256mouth.pth
-```
-
-* For running inference on custom videos, run the following command:
-```bash
-python inference.py --mouth_region_size=256 --source_video_path=xxx.mp4 --source_openface_landmark_path=xxx.csv --driving_audio_path=xxx.wav --pretrained_clip_DINet_path=./asserts/clip_training_DINet_256mouth.pth
+python inference.py --mouth_region_size 256 --source_video_path test.mp4 --source_openface_landmark_path test.csv --driving_audio_path test.wav --res_video_dir test_output/ --pretrained_clip_DINet_path ./asserts/clip_training_DINet_256mouth.pth
 ```
 
 ## Additional Setup Notes
@@ -69,7 +64,7 @@ The `.csv` file should contain the facial landmarks detected using [OpenFace](ht
     ```
 4. In the first shell (*where the container is running*), run OpenFace on the video:
     ```bash
-    build/bin/FaceLandmarkVidMulti -f test.mp4
+    build/bin/FaceLandmarkVidMulti -f test.mp4 -2Dfp
     ```
 5. The output will be saved as `test.csv` in the `processed` directory. Transfer it back to your local machine (*in a different terminal*):
     ```bash
